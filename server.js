@@ -5,7 +5,7 @@
     BONUS:
     Quando viene scaricata una battuta, controllare che questa non sia già presente nel file json locale. Se lo è, caricare un altra battuta.
 */
-
+const loadData = require("./utilities/loadData");
 const http = require("http");
 
 const dotenv = require("dotenv");
@@ -14,7 +14,8 @@ dotenv.config();
 const port = process.env.PORT || 3000;
 
 const server = http.createServer((req, res) => {
-  res.end("ciao a tutti");
+  loadData(res);
+  //   res.setHeader("Content-Type", "text/html;charset=utf-8");
 });
 
 server.listen(port, () => {
