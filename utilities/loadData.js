@@ -7,8 +7,11 @@ function loadData(res) {
     .then((response) => response.json())
     .then((data) => {
       const arr = readNorris();
-      const newJoke = { joke: `${data.value}` };
-      arr.push(newJoke);
+      if (arr.length === 0 || !arr.includes(data.value)) {
+        arr.push(data.value);
+      } else {
+        loadData(res);
+      }
       writeDataOnJson(arr);
       res.setHeader("Content-Type", "text/html;charset=utf-8");
       res.end(`<h1>${data.value}</h1>`);
